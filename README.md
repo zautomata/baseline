@@ -1,6 +1,3 @@
-# baseline
-
-
 # Baseline SCM
 
 Baseline is yet another open-source distributed versioning control system, modeled after git, and built following the OpenBSD's philosophy of software development.
