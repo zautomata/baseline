@@ -1,0 +1,157 @@
+.\" Copyright (c) 2014 Mohamed Aslan <maslan@sce.carleton.ca>
+.\"
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.Dd $Mdocdate$
+.Dt BASELINE 1
+.Os
+.Sh NAME
+.Nm baseline
+.Nd distributed versioning control system
+.Sh SYNOPSIS
+.Nm
+.Op Cm add Ar [file or dir]
+.Op Cm branch Fl c | l | s
+.Op Cm cat Fl c
+.Op Cm commit Fl m
+.Op Cm diff
+.Op Cm help
+.Op Cm init
+.Op Cm log Fl c | f | n
+.Op Cm ls Fl c | R
+.Op Cm version
+.Sh DESCRIPTION
+The
+.Nm
+utility provides a command line interface to create or update a
+.Nm
+repository.
+.Nm
+is yet another open-source distributed versioning control system, modeled after git.
+.Nm
+was made to be so simple following a suckless KISS design, and a clean KNF codebase.
+.Nm
+is available under the terms of ISC, a permissive free software licence.
+.Sh ENVIRONMENT
+.Bl -tag -width Ds
+.It Ev EDITOR
+when
+.Nm
+needs to launch a text-editor and the default editor is not specified in the repository configuration file,
+.Nm
+will then look if the EDITOR environmental variable is set and or not, and if it is set
+.Nm
+will attempt to use it.
+.Sh FILES
+.Bl -tag -width Ds
+.It Pa .baseline/config
+This file contains the configuration options for a
+.Nm
+repository.
+.Sh EXIT STATUS
+.Ex -std baseline
+.Sh EXAMPLES
+To find out which version of baseline is installed:
+.Dl $ baseline version
+.Pp
+To create a new repository in the current working directory:
+.Dl $ baseline init
+.Pp
+To add a specific file or directory to your staging area:
+.Dl $ baseline add <filename>
+Or, to add all files and directories to your staging area:
+.Dl $ baseline add \&.
+.Pp
+To commit your staged changes:
+.Dl $ baseline commit -m 'my commit message'
+If the -m flag was omitted, baseline will:
+.Bl -bullet -compact
+.It
+first, search your .baseline/config, for a variable called ``editor''.
+.It
+then, will try the EDITOR environmental variable.
+.It
+otherwise, baseline will complain about missing commit message.
+.El
+.Pp
+To display a diff or generate a patch between a commit and its parent:
+.Dl $ baseline diff <commit id>
+To display a diff between any two commits:
+.Dl $ baseline diff <commit A id> <commit B id>
+.Pp
+To list all commits:
+.Dl $ baseline log
+To list all commits starting from a specific commit:
+.Dl $ baseline log -c <commit id>
+To limit the number of commits being displayed:
+.Dl $ baseline log -n <number of commits>
+To format the output of log command:
+.Dl $ baseline log -f <format>
+Currently the log command supports the following specifiers for each commit:
+.Bl -bullet -compact
+.It
+%n: a number representing the order of the commit in the log list.
+.It
+%an: the author's name.
+.It
+%ae: the author's email address.
+.It
+%at: the author's commit timestamp.
+.It
+%cn: the committer's name.
+.It
+%ce: the committer's email address.
+.It
+%ct: the committer's commit timestamp.
+.It
+%m: the commit's message.
+.It
+\&\\n: a new line.
+.It
+\&\\t: a tab space.
+.It
+Any other character will be displayed as it is.
+.El
+.Pp
+To list files and directories:
+.Dl $ baseline ls
+To recursively list files and directories:
+.Dl $ baseline ls -R
+To list file and directories for a specific commit:
+.Dl $ baseline -c <commit id>
+.Pp
+To get the content of a certain file written to the stdout:
+.Dl $ baseline cat </path/to/file>
+You can easily redirect the output to any other file:
+.Dl $ baseline cat </path/to/file> > myfile.txt
+To get the content of a certain file within a certain commit:
+.Dl $ baseline cat -c <commit id> </path/to/file>
+.Pp
+To find the name of the current branch:
+.Dl $ baseline branch
+To list all the available branches:
+.Dl $ baseline branch -l
+To create a new branch from the current branch:
+.Dl $ baseline branch -c <branch name>
+To switch branches:
+.Dl $ baseline branch -s <branch name>
+.\" .Sh SEE ALSO
+.\" .Xr foobar 1
+.\" .Sh HISTORY
+.Sh AUTHORS
+The
+.Nm
+utility was written by
+.An Mohamed Aslan Aq Mt maslan@sce.carleton.ca .
+.Sh BUGS
+.Nm
+is currently in pre-alpha status, thus far from having any usefulness. That means you can play with it at your own risk.
