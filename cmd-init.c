@@ -78,4 +78,3 @@ cmd_init(int argc, char **argv)
 	baseline_session_end(&s);
 	return EXIT_SUCCESS;
 }
-

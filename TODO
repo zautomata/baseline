@@ -1,0 +1,11 @@
+[] takeout the branches feature to follow "Trunk Development Model"
+[] make a "tags" feature i.e. cmd-tag to tag releases
+[] fork todo.sh into C; i.e. cmd-todo
+[] modify cmd-init automatically to generate and force the opinionated
+	HACK: 		guidlines for development
+	TODO:		BUGS/FEATURES 
+	CHANGELOG: 	https://keepachangelog.com/en/1.0.0/
+	CONTRIBUTORS: 	name, ssh key to allow access to the hackspree
+			driver node.
+	Pa
+[] talk(1) biff(1) mesg(1) wall(1) write(1)
